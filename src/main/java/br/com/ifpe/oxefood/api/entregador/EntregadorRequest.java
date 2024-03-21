@@ -14,7 +14,7 @@ public class EntregadorRequest {
 
     private Double valorFrete;
     private String enderecoRua;
-    private String endercoNumero;
+    private String enderecoNumero;
     private String enderecoBairro;
     private String enderecoCidade;
     private String enderecoCep;
@@ -26,7 +26,7 @@ public class EntregadorRequest {
 
        return Entregador.builder()
                 .ativo(ativo)
-                .endercoNumero(endercoNumero)
+                .enderecoNumero(enderecoNumero)
                 .enderecoCidade(enderecoCidade)
                 .enderecoBairro(enderecoBairro)
                 .enderecoCep(enderecoCep)
