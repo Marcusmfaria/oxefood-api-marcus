@@ -24,13 +24,23 @@ public class ClienteService {
     }
 
     public List<Cliente> listarTodos() {
-
         return repository.findAll();
     }
 
-    public Cliente obterPorID(Long id) {
-
+    public Cliente obterPorId(long id) {
         return repository.findById(id).get();
+    }
+
+    @Transactional
+    public void update (Long id, Cliente clienteAlterado) {
+        Cliente cliente = repository.findById(id).get();
+        cliente.setNome(clienteAlterado.getNome());
+        cliente.setCpf(clienteAlterado.getCpf());
+        cliente.setDataNascimento(clienteAlterado.getDataNascimento());
+        cliente.setFoneFixo(clienteAlterado.getFoneFixo());
+        cliente.setFoneCelular(clienteAlterado.getFoneCelular());
+        cliente.setVersao(cliente.getVersao() + 1);
+        repository.save(cliente);
     }
 
 }

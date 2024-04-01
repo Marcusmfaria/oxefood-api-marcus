@@ -3,6 +3,8 @@ package br.com.ifpe.oxefood.modelo.Produto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -21,14 +23,24 @@ public class ProdutoService {
 
     }
 
-    public List<Produto> listarTodos() {
-
+    public List<Produto> listarTodos(){
         return repository.findAll();
     }
-    
 
-    public Produto obterPorID(Long id) {
-
+    public Produto obterPorId(Long id){
         return repository.findById(id).get();
+    }
+
+    @Transactional
+    public void update(Long id, Produto produtoAlterado) {
+        Produto produto = repository.findById(id).get();
+        produto.setCodigo(produtoAlterado.getCodigo());
+        produto.setTitulo(produtoAlterado.getTitulo());
+        produto.setDescricao(produtoAlterado.getDescricao());
+        produto.setValorUnitario(produtoAlterado.getValorUnitario());
+        produto.setTempoEntregaMaximo(produtoAlterado.getTempoEntregaMaximo());
+        produto.setTempoEntregaMinimo(produtoAlterado.getTempoEntregaMinimo());
+        produto.setVersao(produto.getVersao() + 1);
+        repository.save(produto);
     }
 }

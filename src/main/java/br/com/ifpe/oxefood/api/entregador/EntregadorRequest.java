@@ -1,5 +1,7 @@
 package br.com.ifpe.oxefood.api.entregador;
 
+import java.time.LocalDate;
+
 import br.com.ifpe.oxefood.modelo.Entregador.Entregador;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +14,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class EntregadorRequest {
 
+    private String nome;
+    private String cpf;
+    private String rg;
+    private LocalDate dataNascimento;
+    private String foneFixo;
+    private String foneCelular;
+    private String qtdEntregasRealizadas;
     private Double valorFrete;
     private String enderecoRua;
     private String enderecoNumero;
@@ -26,6 +35,13 @@ public class EntregadorRequest {
 
        return Entregador.builder()
                 .ativo(ativo)
+                .nome(nome)
+                .cpf(cpf)
+                .rg()
+                .dataNascimento(dataNascimento)
+                .foneFixo(foneFixo)
+                .foneCelular(foneCelular)
+                .qtdEntregasRealizadas(qtdEntregasRealizadas)
                 .enderecoNumero(enderecoNumero)
                 .enderecoCidade(enderecoCidade)
                 .enderecoBairro(enderecoBairro)

@@ -10,31 +10,35 @@ import br.com.ifpe.oxefood.modelo.Produto.Produto;
 import br.com.ifpe.oxefood.modelo.Produto.ProdutoService;
 
 
-
 @RestController
 @RequestMapping("/api/produto")
 @CrossOrigin
 public class ProdutoController {
 
     @Autowired
-    private ProdutoService produtoservice;
+    private ProdutoService produtoService;
 
     @PostMapping
     public ResponseEntity<Produto> save (@RequestBody ProdutoRequest request) {
 
-        Produto produto = produtoservice.save(request.build());
-
+        Produto produto = produtoService.save(request.build());
         return new ResponseEntity<Produto>(produto, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<Produto> listarTodos() {
-        return produtoservice.listarTodos();
+    public List<Produto> listarTodos(){
+        return produtoService.listarTodos();
     }
 
-    @GetMapping("/{id}")
-    public Produto obterPorID(@PathVariable Long id) {
-        return produtoservice.obterPorID(id);
+    @GetMapping
+    public Produto obterPorId(@PathVariable Long id){
+        return produtoService.obterPorId(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Produto> update(@PathVariable("id"), Long id, @RequestBody ProdutoRequest produtoRequest){
+        produtoService.update(id, produtoRequest.build());
+        return ResponseEntity.ok().build();
     }
 
 }

@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("/api/entregador")
@@ -16,24 +19,30 @@ import org.springframework.web.bind.annotation.*;
 public class EntregadorController {
 
     @Autowired
-    private EntregadorService entregadorservice;
+    private EntregadorService entregadoService;
 
     @PostMapping
     public ResponseEntity<Entregador> save (@RequestBody EntregadorRequest request) {
 
-        Entregador entregador = entregadorservice.save(request.build());
-
+        Entregador entregador = entregadoService.save(request.build());
         return new ResponseEntity<Entregador>(entregador, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<Entregador> listarTodos() {
-        return entregadorservice.listarTodos();
+    public List<Entregador> listarTodos(){
+        return entregadoService.listarTodos();
     }
 
-    @GetMapping("/{id}")
-    public Entregador obterPorID(@PathVariable Long id) {
-        return entregadorservice.obterPorID(id);
+    @GetMapping
+    public Entregador obterPorId(@PathVariable Long id){
+        return entregadoService.obterPorId(id);
     }
+
+    @PutMapping("{id}")
+    public ResponseEntity<Entregador> update(@PathVariable("id") Long id, @RequestBody EntregadorRequest entregadorRequest){
+        entregadoService.update(id, entregadorRequest.build());
+        return ResponseEntity.ok().build();
+    }
+    
 
 }
