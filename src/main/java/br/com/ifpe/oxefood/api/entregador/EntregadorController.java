@@ -2,7 +2,7 @@ package br.com.ifpe.oxefood.api.entregador;
 
 import br.com.ifpe.oxefood.modelo.Entregador.Entregador;
 import br.com.ifpe.oxefood.modelo.Entregador.EntregadorService;
-import br.com.ifpe.oxefood.modelo.cliente.Cliente;
+
 
 import java.util.List;
 

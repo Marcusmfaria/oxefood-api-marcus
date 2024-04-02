@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import br.com.ifpe.oxefood.modelo.Produto.Produto;
 import br.com.ifpe.oxefood.modelo.Produto.ProdutoService;
-import br.com.ifpe.oxefood.modelo.cliente.Cliente;
 
 
 @RestController
