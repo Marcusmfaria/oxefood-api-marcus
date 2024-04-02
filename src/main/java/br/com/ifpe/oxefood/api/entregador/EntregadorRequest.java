@@ -20,7 +20,7 @@ public class EntregadorRequest {
     private LocalDate dataNascimento;
     private String foneFixo;
     private String foneCelular;
-    private String qtdEntregasRealizadas;
+    private Integer qtdEntregasRealizadas;
     private Double valorFrete;
     private String enderecoRua;
     private String enderecoNumero;
@@ -37,7 +37,7 @@ public class EntregadorRequest {
                 .ativo(ativo)
                 .nome(nome)
                 .cpf(cpf)
-                .rg()
+                .rg(rg)
                 .dataNascimento(dataNascimento)
                 .foneFixo(foneFixo)
                 .foneCelular(foneCelular)

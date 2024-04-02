@@ -31,11 +31,11 @@ public class Entregador extends EntidadeAuditavel {
     @Column
     private LocalDate dataNascimento;
     @Column
-    private LocalDate foneFixo;
+    private String foneFixo;
     @Column
-    private LocalDate foneCelular;
+    private String foneCelular;
     @Column
-    private LocalDate qtdEntregasRealizadas;
+    private Integer qtdEntregasRealizadas;
     @Column
     private Double valorFrete;
     @Column
