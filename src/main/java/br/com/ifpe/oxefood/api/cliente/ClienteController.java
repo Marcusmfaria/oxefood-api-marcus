@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -29,14 +27,15 @@ public class ClienteController {
     }
 
     @GetMapping
-    public List<Cliente> listarTodos(){
+    public List<Cliente> listarTodos() {
         return clienteService.listarTodos();
     }
 
-    @GetMapping()
-    public Cliente obterPorId(@PathVariable Long id) {
-        return clienteService.obterPorId(id);
+    @GetMapping("/{id}")
+    public Cliente obterPorID(@PathVariable Long id) {
+        return clienteService.obterPorID(id);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Cliente> update(@PathVariable("id") Long id, @RequestBody ClienteRequest clienteRequest) {

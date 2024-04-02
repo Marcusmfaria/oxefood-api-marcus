@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import br.com.ifpe.oxefood.modelo.Produto.Produto;
 import br.com.ifpe.oxefood.modelo.Produto.ProdutoService;
+import br.com.ifpe.oxefood.modelo.cliente.Cliente;
 
 
 @RestController
@@ -25,13 +26,13 @@ public class ProdutoController {
         return new ResponseEntity<Produto>(produto, HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public List<Produto> listarTodos(){
+   @GetMapping
+    public List<Produto> listarTodos() {
         return produtoService.listarTodos();
     }
 
-    @GetMapping
-    public Produto obterPorId(@PathVariable Long id){
+    @GetMapping("/{id}")
+    public Produto obterPorID(@PathVariable Long id) {
         return produtoService.obterPorId(id);
     }
 
