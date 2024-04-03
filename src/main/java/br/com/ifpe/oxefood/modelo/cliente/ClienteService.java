@@ -1,12 +1,12 @@
 package br.com.ifpe.oxefood.modelo.cliente;
 
-import jakarta.transaction.Transactional;
-
+import java.time.LocalDate;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import jakarta.transaction.Transactional;
 
 @Service
 public class ClienteService {
@@ -43,6 +43,15 @@ public class ClienteService {
         cliente.setFoneFixo(clienteAlterado.getFoneFixo());
         cliente.setFoneCelular(clienteAlterado.getFoneCelular());
         cliente.setVersao(cliente.getVersao() + 1);
+        repository.save(cliente);
+    }
+
+    @Transactional
+    public void delete (Long id){
+        Cliente cliente = repository.findById(id).get();
+        cliente.setHabilitado(Boolean.FALSE);
+        cliente.setVersao(cliente.getVersao()+1);
+
         repository.save(cliente);
     }
 
