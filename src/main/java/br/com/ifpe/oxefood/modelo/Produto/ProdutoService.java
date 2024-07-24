@@ -3,7 +3,7 @@ package br.com.ifpe.oxefood.modelo.Produto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.ifpe.oxefood.modelo.cliente.Cliente;
+import br.com.ifpe.oxefood.util.exception.ProdutoException;
 import jakarta.transaction.Transactional;
 
 import java.time.LocalDate;
@@ -34,6 +34,10 @@ public class ProdutoService {
 
     @Transactional
     public void update(Long id, Produto produtoAlterado) {
+
+        if (produtoAlterado.getValorUnitario() < 10) {
+            throw new ProdutoException(ProdutoException.MSG_VALOR_MINIMO_PRODUTO);
+        }
         Produto produto = repository.findById(id).get();
         produto.setCodigo(produtoAlterado.getCodigo());
         produto.setTitulo(produtoAlterado.getTitulo());

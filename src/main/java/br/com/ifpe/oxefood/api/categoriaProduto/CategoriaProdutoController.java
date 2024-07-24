@@ -2,10 +2,8 @@ package br.com.ifpe.oxefood.api.categoriaProduto;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.ifpe.oxefood.api.cliente.ClienteRequest;
 import br.com.ifpe.oxefood.modelo.categoriaProduto.CategoriaProduto;
 import br.com.ifpe.oxefood.modelo.categoriaProduto.CategoriaProdutoService;
-import br.com.ifpe.oxefood.modelo.cliente.Cliente;
 import io.swagger.v3.oas.annotations.Operation;
 
 import java.util.List;
