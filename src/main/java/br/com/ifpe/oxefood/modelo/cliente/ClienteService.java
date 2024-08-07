@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.ifpe.oxefood.modelo.mensagens.EmailService;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -18,13 +19,22 @@ public class ClienteService {
     @Autowired
     private EnderecoClienteRepository enderecoClienteRepository;
 
+    @Autowired
+    private EmailService emailService;
+
+
     @Transactional
     public Cliente save(Cliente cliente) {
 
         cliente.setHabilitado(Boolean.TRUE);
-        cliente.setVersao(1L);
-        cliente.setDataCriacao(LocalDate.now());
-        return repository.save(cliente);
+       cliente.setVersao(1L);
+       cliente.setDataCriacao(LocalDate.now());
+       Cliente clienteSalvo = repository.save(cliente);
+
+       emailService.enviarEmailConfirmacaoCadastroCliente(clienteSalvo);
+
+       return clienteSalvo;
+
     }
 
     public List<Cliente> listarTodos() {
