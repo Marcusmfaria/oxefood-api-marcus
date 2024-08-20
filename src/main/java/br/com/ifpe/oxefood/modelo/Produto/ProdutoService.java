@@ -3,7 +3,7 @@ package br.com.ifpe.oxefood.modelo.Produto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.ifpe.oxefood.util.exception.ProdutoException;
+import br.com.ifpe.oxefood.modelo.cliente.Cliente;
 import jakarta.transaction.Transactional;
 
 import java.time.LocalDate;
@@ -34,10 +34,6 @@ public class ProdutoService {
 
     @Transactional
     public void update(Long id, Produto produtoAlterado) {
-
-        if (produtoAlterado.getValorUnitario() < 10) {
-            throw new ProdutoException(ProdutoException.MSG_VALOR_MINIMO_PRODUTO);
-        }
         Produto produto = repository.findById(id).get();
         produto.setCodigo(produtoAlterado.getCodigo());
         produto.setTitulo(produtoAlterado.getTitulo());
@@ -57,4 +53,33 @@ public class ProdutoService {
 
         repository.save(produto);
     }
+
+    public List<Produto> filtrar(String codigo, String titulo, Long idCategoria) {
+
+        List<Produto> listaProdutos = repository.findAll();
+ 
+        if ((codigo != null && !"".equals(codigo)) &&
+            (titulo == null || "".equals(titulo)) &&
+            (idCategoria == null)) {
+                listaProdutos = repository.consultarPorCodigo(codigo);
+        } else if (
+            (codigo == null || "".equals(codigo)) &&
+            (titulo != null && !"".equals(titulo)) &&
+            (idCategoria == null)) {    
+                listaProdutos = repository.findByTituloContainingIgnoreCaseOrderByTituloAsc(titulo);
+        } else if (
+            (codigo == null || "".equals(codigo)) &&
+            (titulo == null || "".equals(titulo)) &&
+            (idCategoria != null)) {
+                listaProdutos = repository.consultarPorCategoria(idCategoria); 
+        } else if (
+            (codigo == null || "".equals(codigo)) &&
+            (titulo != null && !"".equals(titulo)) &&
+            (idCategoria != null)) {
+                listaProdutos = repository.consultarPorTituloECategoria(titulo, idCategoria); 
+        }
+ 
+        return listaProdutos;
+ }
+ 
 }

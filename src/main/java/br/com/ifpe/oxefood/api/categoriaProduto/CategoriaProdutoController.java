@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
-
 @RestController
 @RequestMapping("/api/categoriaProduto")
 @CrossOrigin
@@ -29,55 +27,39 @@ public class CategoriaProdutoController {
     @Autowired
     private CategoriaProdutoService categoriaProdutoService;
 
-
-    @Operation(
-    summary = "Serviço responsável por salvar uma categoria de produto no sistema.",
-       description = "Exemplo de descrição de um endpoint responsável por inserir uma categoria de produto no sistema."
-    )
-     @PostMapping
+    @Operation(summary = "Serviço responsável por salvar uma categoria de produto no sistema.", description = "Exemplo de descrição de um endpoint responsável por inserir uma categoria de produto no sistema.")
+    @PostMapping
     public ResponseEntity<CategoriaProduto> save(@RequestBody CategoriaProdutoRequest request) {
 
         CategoriaProduto categoriaProduto = categoriaProdutoService.save(request.build());
         return new ResponseEntity<CategoriaProduto>(categoriaProduto, HttpStatus.CREATED);
     }
-    
-    @Operation(
-       summary = "Serviço responsável por listar todas as categorias de produto no sistema.",
-       description = "Exemplo de descrição de um endpoint responsável por listar todas as categorias de produto no sistema."
-   )
+
+    @Operation(summary = "Serviço responsável por listar todas as categorias de produto no sistema.", description = "Exemplo de descrição de um endpoint responsável por listar todas as categorias de produto no sistema.")
     @GetMapping
     public List<CategoriaProduto> listarTodos() {
         return categoriaProdutoService.listarTodos();
     }
 
-    @Operation(
-       summary = "Serviço responsável por listar uma categoria de produto no sistema.",
-       description = "Exemplo de descrição de um endpoint responsável por listar uma categoria de produto no sistema."
-   )
+    @Operation(summary = "Serviço responsável por listar uma categoria de produto no sistema.", description = "Exemplo de descrição de um endpoint responsável por listar uma categoria de produto no sistema.")
     @GetMapping("/{id}")
     public CategoriaProduto obterPorID(@PathVariable Long id) {
         return categoriaProdutoService.obterPorID(id);
     }
 
-     @Operation(
-       summary = "Serviço responsável por alterar uma categoria de produto no sistema.",
-       description = "Exemplo de descrição de um endpoint responsável por alterar uma categoria de produto no sistema."
-   )
+    @Operation(summary = "Serviço responsável por alterar uma categoria de produto no sistema.", description = "Exemplo de descrição de um endpoint responsável por alterar uma categoria de produto no sistema.")
     @PutMapping("/{id}")
-    public ResponseEntity<CategoriaProduto> update(@PathVariable("id") Long id, @RequestBody CategoriaProdutoRequest request) {
+    public ResponseEntity<CategoriaProduto> update(@PathVariable("id") Long id,
+            @RequestBody CategoriaProdutoRequest request) {
         categoriaProdutoService.update(id, request.build());
-        return ResponseEntity.ok().build();}
-    
-          @Operation(
-            summary = "Serviço responsável por deletar um cliente no sistema.",
-            description = "Exemplo de descrição de um endpoint responsável por deletar um cliente no sistema."
-        )     
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
-        categoriaProdutoService.delete(id);
         return ResponseEntity.ok().build();
     }
 
-
+    @Operation(summary = "Serviço responsável por deletar um cliente no sistema.", description = "Exemplo de descrição de um endpoint responsável por deletar um cliente no sistema.")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        categoriaProdutoService.delete(id);
+        return ResponseEntity.ok().build();
+    }
 
 }

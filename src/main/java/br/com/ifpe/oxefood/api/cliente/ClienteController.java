@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifpe.oxefood.modelo.cliente.Cliente;
 import br.com.ifpe.oxefood.modelo.cliente.ClienteService;
-import br.com.ifpe.oxefood.modelo.cliente.EnderecoCliente;
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.validation.Valid;
 
 
 
@@ -36,7 +34,7 @@ public class ClienteController {
        description = "Exemplo de descrição de um endpoint responsável por inserir um cliente no sistema."
    )
     @PostMapping
-    public ResponseEntity<Cliente> save(@RequestBody @Valid ClienteRequest request) {
+    public ResponseEntity<Cliente> save(@RequestBody ClienteRequest request) {
 
         Cliente cliente = clienteService.save(request.build());
         return new ResponseEntity<Cliente>(cliente, HttpStatus.CREATED);
@@ -81,26 +79,4 @@ public class ClienteController {
         clienteService.delete(id);
         return ResponseEntity.ok().build();
     }
-
-    @PostMapping("/endereco/{clienteId}")
-   public ResponseEntity<EnderecoCliente> adicionarEnderecoCliente(@PathVariable("clienteId") Long clienteId, @RequestBody @Valid EnderecoClienteRequest request) {
-
-       EnderecoCliente endereco = clienteService.adicionarEnderecoCliente(clienteId, request.build());
-       return new ResponseEntity<EnderecoCliente>(endereco, HttpStatus.CREATED);
-   }
-
-   @PutMapping("/endereco/{enderecoId}")
-   public ResponseEntity<EnderecoCliente> atualizarEnderecoCliente(@PathVariable("enderecoId") Long enderecoId, @RequestBody EnderecoClienteRequest request) {
-
-       EnderecoCliente endereco = clienteService.atualizarEnderecoCliente(enderecoId, request.build());
-       return new ResponseEntity<EnderecoCliente>(endereco, HttpStatus.OK);
-   }
-  
-   @DeleteMapping("/endereco/{enderecoId}")
-   public ResponseEntity<Void> removerEnderecoCliente(@PathVariable("enderecoId") Long enderecoId) {
-
-       clienteService.removerEnderecoCliente(enderecoId);
-       return ResponseEntity.noContent().build();
-   }
-
 }
